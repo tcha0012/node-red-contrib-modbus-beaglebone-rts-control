@@ -426,7 +426,40 @@ module.exports = function (RED) {
                     return false
                   })
                 break
+
             }
+
+            // set up rts when connecting to serial port
+            let fd = Object.getOwnPropertyDescriptors(node.client)._port.value._client.settings.binding.fd
+            // Standard Linux RS485 ioctl:
+            let TIOCSRS485 = 0x542F
+            let TIOCGRS485 = 0x542E
+
+            // Define constants
+            const SER_RS485_ENABLED = (1 << 0);
+            const SER_RS485_RTS_ON_SEND = (1 << 1);
+            const SER_RS485_RTS_AFTER_SEND = (1 << 2);
+            const SER_RS485_RTS_BEFORE_SEND = (1 << 3);
+            const SER_RS485_RX_DURING_TX = (1 << 4);
+            const SER_RS485_USE_GPIO = (1 << 5);
+
+            // Enable RS485 mode using a GPIO pin to control RE/DE
+            const RS485_FLAGS = SER_RS485_ENABLED | SER_RS485_USE_GPIO | SER_RS485_RTS_AFTER_SEND;
+
+            // The GPIO pin to use
+            const RS485_RTS_GPIO_PIN = 13;
+            const serial_rs485 = Buffer.alloc(32); // 9 unsigned 32-bit values
+
+            // Pack the config into the buffer
+            serial_rs485.writeUInt32LE(RS485_FLAGS, 0);         // config flags
+            serial_rs485.writeUInt32LE(0, 4);                   // delay in us before send
+            serial_rs485.writeUInt32LE(0, 8);                   // delay in us after send
+            serial_rs485.writeUInt32LE(RS485_RTS_GPIO_PIN, 12); // the pin number used for DE/RE
+
+            // save buffer to ioctl
+            var ret = ioctl(fd, TIOCSRS485, serial_rs485);
+
+          
           } catch (e) {
             node.modbusSerialErrorHandling(e)
             return false
