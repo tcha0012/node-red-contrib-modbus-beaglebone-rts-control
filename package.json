@@ -12,7 +12,8 @@
     "@open-p4nr/modbus-serial": "https://dl.cloudsmith.io/public/iniationware-gmbh/plus4nodered/npm/open-p4nr/modbus-serial/8.1.0/modbus-serial-8.1.0.tgz",
     "source-map-support": "~0.5.21",
     "underscore": "~1.13.6",
-    "vm2": "~3.9.19"
+    "vm2": "~3.9.19",
+    "ioctl": "~2.0.2"
   },
   "optionalDependencies": {
     "@serialport/list": "~10.5.0",

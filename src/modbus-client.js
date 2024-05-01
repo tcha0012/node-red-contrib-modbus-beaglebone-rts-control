@@ -22,6 +22,7 @@ module.exports = function (RED) {
   const coreModbusQueue = require('./core/modbus-queue-core')
   const internalDebugLog = require('debug')('contribModbus:config:client')
   const _ = require('underscore')
+  const ioctl = require('ioctl')
 
   function ModbusClientNode (config) {
     RED.nodes.createNode(this, config)
@@ -428,9 +429,6 @@ module.exports = function (RED) {
                 break
 
             }
-
-            // set up rts when connecting to serial port
-            let fd = Object.getOwnPropertyDescriptors(node.client)._port.value._client.settings.binding.fd
             // Standard Linux RS485 ioctl:
             let TIOCSRS485 = 0x542F
             let TIOCGRS485 = 0x542E
@@ -455,6 +453,9 @@ module.exports = function (RED) {
             serial_rs485.writeUInt32LE(0, 4);                   // delay in us before send
             serial_rs485.writeUInt32LE(0, 8);                   // delay in us after send
             serial_rs485.writeUInt32LE(RS485_RTS_GPIO_PIN, 12); // the pin number used for DE/RE
+
+            // set up rts when connecting to serial port
+            let fd = Object.getOwnPropertyDescriptors(node.client)._port.value._client.settings.binding.fd
 
             // save buffer to ioctl
             var ret = ioctl(fd, TIOCSRS485, serial_rs485);
