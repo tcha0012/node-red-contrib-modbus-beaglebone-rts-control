@@ -31,26 +31,26 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/biancoroyal/node-red-contrib-modbus.git"
+    "url": "git+https://github.com/tcha0012/node-red-contrib-modbus-beaglebone-rts-control.git"
   },
   "node-red": {
     "version": ">=2",
     "nodes": {
-      "Modbus-Client": "modbus/modbus-client.js",
-      "Modbus-Response": "modbus/modbus-response.js",
-      "Modbus-Read": "modbus/modbus-read.js",
-      "Modbus-Getter": "modbus/modbus-getter.js",
-      "Modbus-Flex-Getter": "modbus/modbus-flex-getter.js",
-      "Modbus-Write": "modbus/modbus-write.js",
-      "Modbus-Flex-Write": "modbus/modbus-flex-write.js",
-      "Modbus-Server": "modbus/modbus-server.js",
-      "Modbus-Flex-Server": "modbus/modbus-flex-server.js",
-      "Modbus-Queue-Info": "modbus/modbus-queue-info.js",
-      "Modbus-Flex-Connector": "modbus/modbus-flex-connector.js",
-      "Modbus-IO-Config": "modbus/modbus-io-config.js",
-      "Modbus-Response-Filter": "modbus/modbus-response-filter.js",
-      "Modbus-Flex-Sequencer": "modbus/modbus-flex-sequencer.js",
-      "Modbus-Flex-Fc": "modbus/modbus-flex-fc.js"
+      "Modbus-Client": "src/modbus-client.js",
+      "Modbus-Response": "src/modbus-response.js",
+      "Modbus-Read": "src/modbus-read.js",
+      "Modbus-Getter": "src/modbus-getter.js",
+      "Modbus-Flex-Getter": "src/modbus-flex-getter.js",
+      "Modbus-Write": "src/modbus-write.js",
+      "Modbus-Flex-Write": "src/modbus-flex-write.js",
+      "Modbus-Server": "src/modbus-server.js",
+      "Modbus-Flex-Server": "src/modbus-flex-server.js",
+      "Modbus-Queue-Info": "src/modbus-queue-info.js",
+      "Modbus-Flex-Connector": "src/modbus-flex-connector.js",
+      "Modbus-IO-Config": "src/modbus-io-config.js",
+      "Modbus-Response-Filter": "src/modbus-response-filter.js",
+      "Modbus-Flex-Sequencer": "src/modbus-flex-sequencer.js",
+      "Modbus-Flex-Fc": "src/modbus-flex-fc.js"
     }
   },
   "author": "Klaus Landsdorf <klaus.landsdorf@bianco-royal.de>",
